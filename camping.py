@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# TODO: Put the list of targets to check periodically with corresponding dates
+
 import argparse
 import json
 import logging
