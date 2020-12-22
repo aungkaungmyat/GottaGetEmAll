@@ -10,5 +10,5 @@ with open(CREDENTIALS_FILE) as f:
 
 client = Client.from_token(tc['access_token_key'])
 
-messages = client.bots.post(tc['bot_id'], "Yoda left the conversation")
+messages = client.bots.post(tc['bot_id'], "cuz msg is set to empty array in the script and it is not working as expected :(")
 

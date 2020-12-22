@@ -19,13 +19,13 @@ with open(CREDENTIALS_FILE) as f:
     groupme_cred= json.load(f)
 
 def create_msg(msg):
-    msg = []
+    # msg = []
     client = Client.from_token(groupme_cred['access_token_key'])
     messages = client.bots.post(groupme_cred['bot_id'], msg)
 
     print("The following was messaged: ")
     print()
-    print(msg)
+    print(messages)
 
 
 
@@ -47,6 +47,7 @@ if call_time + random.randint(DELAY_TIME-30, DELAY_TIME+30) > int(time.time()):
 if "Something went wrong" in first_line:
     create_msg("I'm broken! Please help me, your father Darth Vader.")
     sys.exit()
+
 
 
 available_site_strings = []
