@@ -155,6 +155,7 @@ def consecutive_nights(available, nights):
 def main(parks):
     out = []
     availabilities = False
+    noti_message = ""
     for park_id in parks:
         park_information = get_park_information(
             park_id, args.start_date, args.end_date, args.campsite_type
@@ -171,16 +172,24 @@ def main(parks):
         if current:
             emoji = SUCCESS_EMOJI
             availabilities = True
-        else:
-            emoji = FAILURE_EMOJI
-
-        out.append(
+            out.append(
             "{} {} ({}): {} site(s) available out of {} site(s)".format(
                 emoji, name_of_site, park_id, current, maximum
             )
-        )
+            )
+        else:
+            emoji = FAILURE_EMOJI
+
+        """out.append(
+            "{} {} ({}): {} site(s) available out of {} site(s)".format(
+                emoji, name_of_site, park_id, current, maximum
+            )
+        )"""
 
     if availabilities:
+        noti_message += "There are campsites available from {} to {}!!!".format(
+                args.start_date.strftime(INPUT_DATE_FORMAT),
+                args.end_date.strftime(INPUT_DATE_FORMAT))
         print(
             "There are campsites available from {} to {}!!!".format(
                 args.start_date.strftime(INPUT_DATE_FORMAT),
@@ -190,6 +199,7 @@ def main(parks):
     else:
         print("There are no campsites available :(")
     print("\n".join(out))
+    print(noti_message)
     return availabilities
 
 
@@ -254,6 +264,8 @@ if __name__ == "__main__":
         LOG.setLevel(logging.DEBUG)
 
     parks = args.parks or [p.strip() for p in sys.stdin]
+
+    print(parks)
 
     try:
         code = 0 if main(parks) else 1
